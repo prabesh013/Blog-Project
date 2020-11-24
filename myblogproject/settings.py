@@ -38,7 +38,7 @@ TEMPLATE_DIR_TWO = BASE_DIR / "users/templates/users"
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1','localhost','prabesh-django-blog.herokuapp.com']
 
