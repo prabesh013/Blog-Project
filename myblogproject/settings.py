@@ -98,9 +98,13 @@ WSGI_APPLICATION = 'myblogproject.wsgi.application'
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+     'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.environ.get('NAME'),
+        'USER': os.environ.get('DBUSERNAME'),
+        'PASSWORD': os.environ.get('PASSWORD'),
+        'HOST': os.environ.get('HOST'),
+        'PORT': os.environ.get('DBPORT'),
     }
 }
 
@@ -145,9 +149,9 @@ DEFAULT_FILE_STORAGE = 'clouldinary_storage.storage.MediaCloudinaryStorage'
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = BASE_DIR / "staticfiles"
+# STATIC_ROOT = BASE_DIR / "staticfiles"
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
-STATICFILES_DIRS = ((BASE_DIR/ "staticfiles"),)
+# STATICFILES_DIRS = ((BASE_DIR/ "staticfiles"),)
 
 MEDIA_ROOT = BASE_DIR / "media"
 MEDIA_URL = '/media/'
@@ -169,7 +173,7 @@ EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 EMAIL_PORT = 587
 
 cloudinary.config(
-    cloud_name = os.environ.env('CLOUD_NAME'),
+    cloud_name = os.environ.get('CLOUD_NAME'),
     api_key = os.environ.get('API_KEY'),
     api_secret = os.environ.get('API_SECRET')
 )
