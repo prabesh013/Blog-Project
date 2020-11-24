@@ -38,7 +38,7 @@ TEMPLATE_DIR_TWO = BASE_DIR / "users/templates/users"
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['127.0.0.1','localhost','prabesh-django-blog.herokuapp.com']
 
@@ -151,7 +151,9 @@ DEFAULT_FILE_STORAGE = 'clouldinary_storage.storage.MediaCloudinaryStorage'
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / "staticfiles"
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
-STATICFILES_DIRS = ((BASE_DIR/ "staticfiles"),)
+# STATICFILES_DIRS = ((BASE_DIR/ "staticfiles"),)
+
+
 
 MEDIA_ROOT = BASE_DIR / "media"
 MEDIA_URL = '/media/'
