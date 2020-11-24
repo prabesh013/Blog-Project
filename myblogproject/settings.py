@@ -17,6 +17,8 @@ import cloudinary
 import cloudinary.uploader
 import cloudinary.api
 
+import django_heroku
+
 import environ
 env = environ.Env(
     DEBUG=(bool, False)
@@ -171,3 +173,5 @@ cloudinary.config(
     api_key = os.environ.get('API_KEY'),
     api_secret = os.environ.get('API_SECRET')
 )
+
+django_heroku.settings(locals())
