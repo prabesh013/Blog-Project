@@ -19,9 +19,7 @@
     <link rel="stylesheet" href="{% static 'blog/css/style.css' %}" />
 
     <title>{% block title_block %}{% endblock %}</title>
-    <script> 
-
-    </script>
+    <script></script>
   </head>
   <body>
     {% load cloudinary %}
@@ -93,7 +91,6 @@
       </nav>
     </header>
     <main role="main" class="container">
-      
       <div class="content">
         <div class="row">
           <div class="col-md-8">
@@ -102,9 +99,12 @@
             {% endfor %} {% endif %}
             <div class="blog_related">
               <div class="clearfix">
-              <button class="btn btn-secondary btn-sm mb-1 float-right" onclick="myFunction()">Dark</button>
+                <button class="btn btn-secondary btn-sm mb-1 float-right" onclick="myFunction()">
+                  Dark
+                </button>
               </div>
-              {% block content %} {% endblock %}</div>
+              {% block content %} {% endblock %}
+            </div>
           </div>
           {% block sidebar %} {% endblock %}
         </div>
@@ -132,60 +132,44 @@
       crossorigin="anonymous"
     ></script>
     <script>
-      function myFunction() {
-        // console.log("here0")
-        var darkMode = localStorage.getItem("darkMode");
-        if(darkMode === "false") {
-          // console.log("here1")
-          localStorage.setItem("darkMode", "true")
-          // console.log("here139",localStorage.getItem("darkMode"));
-          darky();
-        }
-        else{
-          localStorage.setItem("darkMode", "false");
-        } 
-      };
-      function darky(){
-      console.log("dark")
-      console.log(localStorage.getItem("darkMode"));
-      var element = document.body;
-      var post = document.querySelectorAll(".card");
-      var jum  = document.querySelectorAll(".jumbotron")
+      let element = document.body;
+      let post = document.querySelectorAll(".card");
+      let jum = document.querySelectorAll(".jumbotron");
+      let darkMode = localStorage.getItem("darkMode");
 
-      if(localStorage.getItem("darkMode") === "true"){
-        // console.log("here2",localStorage.getItem("darkMode"));
-        element.classList.toggle("dark-mode");
-        console.log(post);
-        for(let i=0;i<post.length;i++)
-        {
-          post[i].classList.toggle("post-dark");
-          // jum[i].classList.toggle("post-dark");
-          post[i].classList.toggle("post");
+      function enableDarkMode() {
+        element.classList.add("dark-mode");
+        for (let i = 0; i < post.length; i++) {
+          post[i].classList.add("post-dark");
         }
-        for(let j=0;j<jum.length;j++)
-        {
-          jum[j].classList.toggle("post-dark");
+        for (let j = 0; j < jum.length; j++) {
+          jum[j].classList.add("post-dark");
+        }
+        localStorage.setItem("darkMode", "enabled");
+      }
+      function disableDarkMode() {
+        document.body.classList.remove("dark-mode");
+        for (let i = 0; i < post.length; i++) {
+          post[i].classList.remove("post-dark");
+        }
+        for (let j = 0; j < jum.length; j++) {
+          jum[j].classList.remove("post-dark");
+        }
+        localStorage.setItem("darkMode", null);
+      }
+      if (darkMode === "enabled") {
+        enableDarkMode();
+      }
+      function myFunction() {
+        console.log("clicked");
+        darkMode = localStorage.getItem("darkMode");
+        if (darkMode !== "enabled") {
+          enableDarkMode();
+        } else {
+          disableDarkMode();
         }
       }
-      else{
-        element.classList.toggle("dark-mode");
-        console.log(post);
-        for(let i=0;i<post.length;i++)
-        {
-          post[i].classList.toggle("post-dark");
-          // jum[i].classList.toggle("post-dark");
-          post[i].classList.toggle("post");
-        }
-        for(let j=0;j<jum.length;j++)
-        {
-          jum[j].classList.toggle("post-dark");
-        }
-      }
-      }
-      // darky();
-      </script>
-      {% block home_script %} {% endblock %}
-  
+    </script>
+    {% block home_script %} {% endblock %}
   </body>
 </html>
-
