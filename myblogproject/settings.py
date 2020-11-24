@@ -149,9 +149,9 @@ DEFAULT_FILE_STORAGE = 'clouldinary_storage.storage.MediaCloudinaryStorage'
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
-# STATIC_ROOT = BASE_DIR / "staticfiles"
+STATIC_ROOT = BASE_DIR / "staticfiles"
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
-# STATICFILES_DIRS = ((BASE_DIR/ "staticfiles"),)
+STATICFILES_DIRS = ((BASE_DIR/ "staticfiles"),)
 
 MEDIA_ROOT = BASE_DIR / "media"
 MEDIA_URL = '/media/'
