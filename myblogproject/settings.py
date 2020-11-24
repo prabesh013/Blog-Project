@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 
+import os 
 import cloudinary
 import cloudinary.uploader
 import cloudinary.api
@@ -32,7 +33,7 @@ TEMPLATE_DIR_TWO = BASE_DIR / "users/templates/users"
 
 # SECURITY WARNING: keep the secret key used in production secret!
 # SECRET_KEY = '!ocp9lq98&0r&j^ug&ezk=br@e&6kportm-t$mrewpjlnoo=#f'
-SECRET_KEY = env('SECRET_KEY')
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
