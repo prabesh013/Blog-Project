@@ -1,0 +1,27 @@
+{% extends 'blog/base.html' %} 
+{% block title_block %}
+    Drafts
+{% endblock %}
+{% block content %} 
+<h2>Drafts</h2>
+    {% for post in posts %}
+    {% if post.author == user %}
+        <div class="card mb-4 mt-4 post">
+            <div class="card-body">
+              <h2 class="card-title">{{ post.title }}</h2>
+              <p class="card-text">{{ post.text|safe|truncatechars:100 }}</p>
+              <!-- <a href="{% url 'post_detail' pk=post.pk %}" class="btn btn-primary btn-sm">Read More &rarr;</a> -->
+              <a href="{% url 'post_update' pk=post.pk %}" class="btn btn-warning btn-sm">Update</a>
+              <a href="{% url 'post_delete' pk=post.pk %}" class="btn btn-danger btn-sm">Delete</a>
+              <a href="{% url 'post_publish' pk=post.pk %}"class="btn btn-success btn-sm">Publish</a>
+            </div>
+            <div class="card-footer text-muted">
+                Created On
+                {{ post.create_date|date:"D d M Y" }} 
+            </div>
+            
+        </div>
+
+    {% endif %}             
+    {% endfor %} 
+{% endblock %}

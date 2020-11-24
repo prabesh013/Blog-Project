@@ -1,0 +1,41 @@
+{% extends 'blog/base.html' %} 
+{% block title_block %} Blog Detail {% endblock %} 
+{% block content%}
+<a href="{% url 'home' %}" class="btn btn-primary">&larr; Back</a>
+<div class="card mb-4 mt-4 post">
+  <div class="card-body">
+    <h2 class="card-title">{{ post.title }}</h2>
+    <p class="card-text">{{ post.text|safe|linebreaksbr }}</p>
+    {% if post.author == user %}
+    <a href="{% url 'post_update' pk=post.pk %}" class="btn btn-warning btn-sm">Update</a>
+    <a href="{% url 'post_delete' pk=post.pk %}" class="btn btn-danger btn-sm">Delete</a>
+    {% endif %}
+  </div>
+  {% include 'blog/post_footer.html' %}
+</div>
+<hr />
+<div class="comments">
+  <a class="btn btn-primary btn-comment mb-4" href="{% url 'add_comment_to_post' pk=post.pk %}">Add comment</a>
+  <h2>Comments: </h2>
+  <br>
+  {% for comment in post.comments.all %}
+    {% if user.is_authenticated or comment.approved_comment %} 
+      {% if comment.approved_comment %}
+        <p>{{ comment.text|safe|linebreaksbr }} <small>By: {{ comment.author }} on {{ comment.created_date }}</small> 
+          {% if post.author == user %}
+            <a href="{% url 'comment_remove' pk=comment.pk %}">Remove</a> 
+          {% endif %}
+        </p>
+      {% else %}
+        {% if post.author == user %}
+          <a href="{% url 'comment_approve' pk=comment.pk %}">Approve</a>
+          <a href="{% url 'comment_remove' pk=comment.pk %}">Remove</a>  
+          <p>{{ comment.text|safe|linebreaksbr }} <small>By: {{ comment.author }}</small> </p>
+        {% endif %}
+      {% endif %}
+    {% endif %}
+  {% endfor %}
+</div>
+
+
+{% endblock %}

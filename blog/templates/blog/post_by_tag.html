@@ -1,0 +1,12 @@
+{% extends 'blog/base.html' %} 
+{% block title_block %}
+    Post By Tags
+{% endblock %}
+{% block content %} 
+{% if tag %}
+  <h2>All posts of <span class="text-primary">{{ tag.name }} </span> tag :</h2>
+  {% include 'blog/post_info.html' %}
+  {% else %}
+  <h2>No such tag</h2>
+{% endif %}
+{% endblock %}

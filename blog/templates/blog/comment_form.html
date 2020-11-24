@@ -1,0 +1,15 @@
+{% extends 'blog/base.html' %}
+{% load crispy_forms_tags %} 
+{% block title_block %} 
+    Comment
+{% endblock %} 
+{% block content %}
+<div class="jumbotron">
+    <h2>Comment</h2>
+    <form method="POST">
+        {{ form|crispy }}
+        {% csrf_token %}
+        <input type="submit" class="btn btn-primary" value="Comment" />
+    </form>    
+
+{% endblock %}

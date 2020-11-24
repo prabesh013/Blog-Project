@@ -1,0 +1,105 @@
+{% extends 'blog/base.html' %} 
+{% block title_block %} 
+  Blog Home 
+{% endblock %} 
+{% block content %} 
+  {% include 'blog/post_info.html' %}
+  {% if is_paginated  %}
+  <ul class="pagination">
+    {% if page_obj.has_previous %}
+      <li class="page-item"><a class="page-link" href="?page=1">First</a></li>
+     <li class="page-item">
+      <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+        <span class="sr-only">Previous</span>
+      </a>
+       <!-- <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a> -->
+      </li>
+    {% endif %}
+      
+      {% for num in page_obj.paginator.page_range %}
+        {% if page_obj.number == num %}
+          <li class="page-item active"><a class="page-link"href="?page={{ num }}" class="active">{{ num }}</a></li>
+        {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+          <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+        {% endif %}
+      {% endfor %}
+    
+      {% if page_obj.has_next %}
+      <!-- <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a></li> -->
+      <li class="page-item">
+        <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
+          <span aria-hidden="true">&raquo;</span>
+          <span class="sr-only">Next</span>
+        </a>
+      </li>
+      <li class="page-item"><a class="page-link"href="?page={{ page_obj.paginator.num_pages }}">Last</a></li>
+    {% endif %}
+  </ul>  
+  {% endif %}
+{% endblock %}
+{% block sidebar %} 
+<div class="col-md-4">
+  <div class="card mb-4 mt-5 sidebar">
+    <div class="card-body joke">
+      <h3>Laugh Medicine: </h3>
+      <p class="rem">Just a mintute</p>
+      <p class="rem">A Joke is being prepared</p>
+      <p id="jokeq"></p>
+      <p id="jokea"></p>
+    </div>
+  </div>
+
+</div>
+{% endblock %}
+
+{% block home_script %}
+<script>
+  let request = new XMLHttpRequest();
+  // request.open("GET", "https://api.icndb.com/jokes/random");
+  request.open("GET", "https://sv443.net/jokeapi/v2/joke/Programming,Pun?blacklistFlags=nsfw,religious,racist,sexist");
+  request.send();
+
+  request.onload = () => {
+    if (request.status === 200) {
+      console.log("Success");
+      remover();
+      //Extracting data
+      var que = JSON.parse(request.response).setup;
+      var ans = JSON.parse(request.response).delivery;
+      console.log(que);
+      console.log(ans);
+      if (que === undefined || ans === undefined) {
+        jokeadd();
+      } else {
+        //Showing the joke in the table
+        document.getElementById("jokeq").innerText = que;
+        document.getElementById("jokea").innerText = ans;
+        
+      }
+    }
+  };
+  request.onerror = () => {
+    console.log("error");
+    setTimeout(function(){
+      remover();
+      jokeadd();
+    },2000);
+    
+  };
+
+  function remover(){
+    rem = document.querySelectorAll(".rem");
+      console.log(rem.length)
+      for(let i = 0;i<rem.length;i++)
+      {
+        rem[i].parentNode.removeChild(rem[i])
+      }
+      
+  };
+  function jokeadd(){
+    document.getElementById("jokeq").innerText = "I used to love to tell dad jokes.";
+    document.getElementById("jokea").innerText = "Dad, come back...";
+  };
+</script>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'blog/base.html' %}
+{% load crispy_forms_tags %} 
+{% block title_block %} 
+    Login
+{% endblock %} 
+{% block content %}
+<div class="content-section jumbotron">
+    {% if user.is_authenticated %}
+    <h2>Already Logged In!</h2>
+    {% else %}
+    <h2>WE MISSED YOU!</h2>
+    <form action="{% url 'login' %}" method="POST">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <input type="submit" class="btn btn-lg btn-primary" value="Login">
+        <!-- <input type="hidden" name="next" value="{{next}}"> -->
+    </form>
+    <br>
+    <p>Need an account ? <a href="{% url 'register' %}">Register</a> </p>
+    {% endif %}
+</div>
+{% endblock %}

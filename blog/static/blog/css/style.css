@@ -1,0 +1,74 @@
+html, body {width: 100vw; height: 100vh;}
+
+body {
+  padding-top: 70px;
+  background-color: white;
+  color: black;
+  font-family: "Roboto", sans-serif;
+
+}
+.post {
+  background-color: #e8e8e8;
+}
+a:hover {
+  text-decoration: none;
+}
+
+.article-img {
+  height: 30px;
+  width: 30px;
+}
+
+.account-img {
+  height: 125px;
+  width: 125px;
+  margin-right: 20px;
+  margin-bottom: 16px;
+}
+.sidebar {
+  background-color: #e8e8e8;
+  margin-top: 3.6rem !important;
+}
+/* .mainbrand {
+  /* color: #e8e8e8; */
+/* font-size: 1.6em; */
+/* } */
+/* .mainbrand:hover { */
+/* color: #30475e; */
+/* } */
+@media only screen and (max-width: 767px) {
+  .sidebar {
+    display: none;
+  }
+}
+.no-dis {
+  display: none;
+}
+
+/* .custom-navbar {
+  background-color: #222831;
+} */
+.dark-mode {
+  background-color: black;
+  /* color: white; */
+}
+.bt-dark {
+  /* color: white; */
+  background-color: black;
+}
+.clearfix:after {
+  clear: both;
+  display: table;
+  content: "";
+}
+.comments {
+  color: #667799;
+}
+h1,
+h2,
+h3 {
+  color: #667799;
+}
+.post-dark{
+  background-color:#616161;
+}

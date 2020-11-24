@@ -1,0 +1,12 @@
+{% extends 'blog/base.html' %} 
+{% block title_block %}
+    Post By Category
+{% endblock %}
+{% block content %}
+{% if category %}
+  <h2>All posts of <span class="text-primary">{{ category.name }} </span> category :</h2>
+  {% include 'blog/post_info.html' %}
+{% else %}
+  <h2>No such category</h2>
+{% endif %}
+{% endblock %}

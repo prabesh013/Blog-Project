@@ -1,0 +1,13 @@
+{% extends 'blog/base.html' %} {% block title_block %} Blog Home {% endblock %} 
+{% block content %}
+{% if tag %}
+<h2>The tags you created:</h2>
+<div class="created_tag col-md-4">
+  {% for t in tag %}
+    <a href="{% url 'post_by_tag' n=t.name %}" class="btn btn-light btn-sm m-1 btn-block">{{t.name}}</a>
+  {% endfor %}
+</div>
+{% else %}
+  <h2>No tags created yet!</h2>
+{% endif %}
+{% endblock %}

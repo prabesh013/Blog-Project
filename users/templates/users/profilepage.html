@@ -1,0 +1,33 @@
+{% extends "blog/base.html" %} 
+{% load crispy_forms_tags %} 
+{% block title_block %} 
+  Profile Page 
+{%endblock %} 
+{% block content %}
+<div class="personal">
+  <h1>Hello, {{ user.username }}</h1>
+  <img class="rounded-circle account-img" src="{{ user.userprofile.image.url }}" alt="Profile Picture"/>
+  <div class="profile-update jumbotron">
+    <form method="POST" enctype="multipart/form-data">
+      {% csrf_token %} {{u_form|crispy}} {{p_form|crispy}}
+      <input type="submit" class="btn btn-primary bt" value="Update" />
+    </form>
+  </div>
+  <div class="user-created">
+    <div class="jumbotron">
+      <div class="row">
+        <div class="col-md-6">
+          <h4>Those wonderful unpublished blogs</h4>
+          <a class="nav-link btn btn-success btn-block mb-2" href="{% url 'post_draft_list' %}">Draft</a>
+        </div>
+        <div class="col-md-6">
+          <h4>Creations</h4>
+          <a href="{% url 'user_posts' pk=user.id %}" class="btn btn-primary btn-sm btn-block">Post</a>
+          <a href="{% url 'user_category' %}" class="btn btn-primary btn-sm btn-block">Categories</a>
+          <a href="{% url 'user_tag' %}" class="btn btn-primary btn-sm btn-block">Tag</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

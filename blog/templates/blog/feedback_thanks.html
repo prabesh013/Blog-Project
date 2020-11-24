@@ -1,0 +1,10 @@
+{% extends 'blog/base.html' %} 
+{% block title_block %} 
+    Thank You Page
+{% endblock %} 
+{% block content %}
+<div class="jumbotron">
+    <h1>Thanks for the response!</h1>
+    <a href="{% url 'home' %}" class="btn btn-primary">Go blog</a>
+</div>
+{% endblock %}

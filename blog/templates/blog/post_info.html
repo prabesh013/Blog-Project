@@ -1,0 +1,20 @@
+{% for post in posts %} 
+    {% if post.published_date %}
+      <div class="card mb-4 mt-4 post">
+        <div class="card-body">
+          <h2 class="card-title">{{ post.title }}</h2>
+          <p class="card-text">{{ post.text|safe|truncatechars:50 }}</p>
+          <a href="{% url 'post_detail' pk=post.pk %}" class="btn btn-primary btn-sm">Read More &rarr;</a>
+          {% if post.author == user %}
+          <a href="{% url 'post_update' pk=post.pk %}" class="btn btn-warning btn-sm">Update</a>
+          <a href="{% url 'post_delete' pk=post.pk %}" class="btn btn-danger btn-sm">Delete</a>
+          {% endif %}
+          <!-- &nbsp; -->
+          <!-- &nbsp; -->
+          <a href="{% url 'post_detail' pk=post.pk %}" class="ml-2">
+            Comments: {{ post.approve_comments.count }}</a>
+        </div>
+        {% include 'blog/post_footer.html' %}
+      </div>
+    {% endif %} 
+{% endfor %}

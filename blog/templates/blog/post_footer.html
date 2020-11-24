@@ -1,0 +1,9 @@
+<div class="card-footer text-muted">
+    <img class="rounded-circle article-img" src="{{ post.author.userprofile.image.url }}" />
+    <small>By<span class="text-info mr-1"><a href="{% url 'user_posts' pk=post.author.pk %}"> {{post.author}}</a></span>on<span class="test-info mr-1"> {{post.published_date|date:"D M Y"}}</span>| Categories:<span class="text-info mr-1"><a href="{% url 'post_by_category' n=post.category.name %}"> {{ post.category.name}}<a></span>| Tags:{% for tag in post.tags.all %} 
+                <span class="text-info"><a href="{% url 'post_by_tag' n=tag.name %}"> {{ tag.name }}</a></span>,
+              {% empty %} 
+                None 
+              {%endfor%}
+    </small>
+</div>

@@ -1,0 +1,15 @@
+{% extends 'blog/base.html' %}
+{% block title_block %} 
+    Confirm Delete
+{% endblock %} 
+{% block content %}
+<div class="content-section jumbotron">
+    <h2>Delete Post</h2>
+    <form method="POST">
+        <h3>Are you sure to delete "{{ post.title }}" ?</h3>
+        {% csrf_token %}
+        <input type="submit" class="btn btn-lg btn-danger" value="Yes">
+        <a href="{% url 'post_detail' pk=post.pk %}" class="btn btn-lg btn-success">No</a>
+    </form>
+</div>
+{% endblock %}

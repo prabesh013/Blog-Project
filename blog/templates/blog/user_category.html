@@ -1,0 +1,13 @@
+{% extends 'blog/base.html' %} {% block title_block %} Blog Home {% endblock %} 
+{% block content %}
+{% if category %}
+<h2>The categories you created:</h2>
+<div class="created_category col-md-4">
+  {% for c in category %}
+    <a href="{% url 'post_by_category' n=c.name %}" class="btn btn-light btn-sm m-1 btn-block">{{c.name}}</a>
+  {% endfor %}
+</div>
+{% else %}
+  <h2>No category created yet!</h2>
+{% endif %}
+{% endblock %}

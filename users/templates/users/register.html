@@ -1,0 +1,22 @@
+{% extends "blog/base.html" %} 
+{% load crispy_forms_tags %} 
+{% block title_block %} 
+    Register
+{% endblock %} 
+{% block content %}
+
+<div class="content-section jumbotron">
+  {% if user.is_authenticated %}
+    <h2>Already Registered In!</h2>
+    {% else %}
+  <h2>Welcome Aboard Matey!</h2>
+  <form method="POST">
+    {% csrf_token %}
+    {{form|crispy}}
+    <input type="submit" class="btn btn-primary" value="Sign Up" />
+  </form>
+  <br>
+  <p>If already registered then <a href="{% url 'login' %}">Sign In</a></p>
+  {% endif %}
+</div>
+{% endblock %}

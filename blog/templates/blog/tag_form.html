@@ -1,0 +1,17 @@
+{% extends 'blog/base.html' %}
+{% load crispy_forms_tags %} 
+{% block title_block %} 
+    Form Tag
+{% endblock %} 
+{% block content %}
+<!-- <a href="{% url 'home' %}" class="btn btn-primary mb-2">Home</a> -->
+<div class="content-section jumbotron">
+    <h2>Tag Category</h2>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <input type="submit" class="btn btn-lg btn-primary" value="Create">
+        <!-- <input type="hidden" name="next" value="{{next}}"> -->
+    </form>
+</div>
+{% endblock %}
